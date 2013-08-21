@@ -101,6 +101,7 @@ class Service
         $args['backend_instance'] = $backend;
 
         $this->triggerPre($backend, $args);
+        $this->transformInstitutionalFilters($params);
         try {
             $response = $backend->search($query, $offset, $limit, $params);
         } catch (BackendException $e) {
@@ -346,5 +347,36 @@ class Service
         if ($this->logger) {
             $this->logger->$level($message, $context);
         }
+    }
+    
+    /**
+     * Transforms all institution filters in params into one filter containig all given filters,
+     * separates them by logical 'OR' 
+     * @param  \VuFindSearch\ParamBag $paramBag
+     * @return void
+     */
+    protected function transformInstitutionalFilters($params) {
+        //TODO consider
+        //do not perform transformation if Advanced search is being processed (join param is set) 
+        if ( !$params || isset($_GET['join'])) {
+            return;
+        }
+
+        $resultFilters = array();
+        $institutionFilters = array();
+
+        foreach ( $params->get('fq') as $filter ) {
+            if ( strpos($filter, 'institution:' ) === 0 ) {
+               array_push($institutionFilters, $filter);
+            } else {
+               array_push($resultFilters, $filter);
+            }
+        }
+        
+        $institutionString = implode(' OR ', $institutionFilters);
+        if ( is_string($institutionString) && strlen($institutionString) > 0) {
+            $resultFilters[] = $institutionString;
+        }
+        $params->set('fq', $resultFilters);
     }
 }
