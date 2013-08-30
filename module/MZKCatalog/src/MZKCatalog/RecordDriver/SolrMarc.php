@@ -21,11 +21,5 @@ class SolrMarc extends ParentSolrDefault
         }
         return $bibinfo;
     }
-    
-    protected function getEOD()
-    {
-    	$eod = $this->getFirstFieldValue('EOD', array('a'));
-    	return ($eod == 'Y')?true:false;
-    }
 
 }
