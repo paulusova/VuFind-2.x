@@ -775,7 +775,13 @@ class Aleph extends AbstractBase implements \Zend\Log\LoggerAwareInterface,
         } else if (isset($this->defaultPatronId)) {
             $params['patron'] = $this->defaultPatronId;
         }
-        $xml = $this->doRestDLFRequest( array('record', $resource, 'items'), $params);
+        try {
+            $xml = $this->doRestDLFRequest(
+                array('record', $resource, 'items'), $params
+            );
+        } catch (\Exception $ex) {
+            return array();
+        }
         foreach ($xml->{'items'}->{'item'} as $item) {
             $item_status         = (string) $item->{'z30-item-status-code'}; // $isc
             $item_process_status = (string) $item->{'z30-item-process-status-code'}; // $ipsc
