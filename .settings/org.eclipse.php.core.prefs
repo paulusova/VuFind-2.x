@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+org.eclipse.php.core.phpDoc=false
+org.eclipse.php.core.phpForamtterArrayInitSize=4
+org.eclipse.php.core.phpForamtterIndentationSize=4
+org.eclipse.php.core.phpForamtterIndentationWrappedLineSize=4
+org.eclipse.php.core.phpForamtterTabSize=4
+org.eclipse.php.core.phpForamtterUseTabs=false
