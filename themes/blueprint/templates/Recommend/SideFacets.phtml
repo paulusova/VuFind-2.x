@@ -79,7 +79,7 @@
                         <dd>
                            <input type="checkbox" name="filter[]" value="<?=$this->escapeHtml($thisFacet['displayText'])?>"
                             onclick="window.location.href='<?=$this->currentPath().$results->getUrlQuery()->addFacet($title, $thisFacet['value'])?>'"/>
-                           <a href="<? $this->currentPath().$results->getUrlQuery()->addFacet($title, $thisFacet['value'])?>'"> <?=$this->escapeHtml($thisFacet['displayText'])?></a> (<?=$this->escapeHtml($thisFacet['count'])?>)
+                           <a href="<?=$this->currentPath().$results->getUrlQuery()->addFacet($title, $thisFacet['value'])?>'"> <?=$this->escapeHtml($thisFacet['displayText'])?></a> (<?=$this->escapeHtml($thisFacet['count'])?>)
                        </dd>
                     <? endif; ?>
                <? endforeach; ?>   
