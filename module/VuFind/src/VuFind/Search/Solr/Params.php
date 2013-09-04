@@ -39,6 +39,9 @@ use VuFindSearch\ParamBag;
  */
 class Params extends \VuFind\Search\Base\Params
 {
+    
+    const PER_FIELD_PARAM = 'f.';
+    
     /**
      * Facet result limit
      *
@@ -163,6 +166,9 @@ class Params extends \VuFind\Search\Base\Params
                    $facetSet['field'][] = '{!ex=' . $facetField . '_filter}' . $facetField;
                 } else {
                     $facetSet['field'][] = $facetField;
+                }
+                if (in_array($facetField, $this->hierarchicalFacets) && $this->facetPrefix == NULL) {
+                    $facetSet[self::PER_FIELD_PARAM . $facetField . '.facet.prefix'] = '0';
                 }
             }
             if ($this->facetOffset != null) {
@@ -511,7 +517,11 @@ class Params extends \VuFind\Search\Base\Params
         if (!empty($facets)) {
             $backendParams->add('facet', 'true');
             foreach ($facets as $key => $value) {
-                $backendParams->add("facet.{$key}", $value);
+                if (substr($key, 0, strlen(self::PER_FIELD_PARAM)) === self::PER_FIELD_PARAM) {
+                    $backendParams->add($key, $value);
+                } else {
+                    $backendParams->add("facet.{$key}", $value);
+                }
             }
             $backendParams->add('facet.mincount', 1);
         }
