@@ -323,6 +323,8 @@ class Service
         $this->getEventManager()->trigger(self::EVENT_POST, $response, $args);
     }
 
+    }
+    
     /**
      * Transforms all institution filters in params into one filter containig all given filters,
      * separates them by logical 'OR' 
@@ -352,5 +354,4 @@ class Service
             $resultFilters[] = $institutionString;
         }
         $params->set('fq', $resultFilters);
-    }
 }
