@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+include_path=
 org.eclipse.php.core.phpDoc=false
 org.eclipse.php.core.phpForamtterArrayInitSize=4
 org.eclipse.php.core.phpForamtterIndentationSize=4
