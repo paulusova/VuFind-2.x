@@ -323,6 +323,24 @@ class Service
         $this->getEventManager()->trigger(self::EVENT_POST, $response, $args);
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * Send a message to the logger.
+     *
+     * @param string $level   Log level
+     * @param string $message Log message
+     * @param array  $context Log context
+     *
+     * @return void
+     */
+    protected function log($level, $message, array $context = array())
+    {
+        if ($this->logger) {
+            $this->logger->$level($message, $context);
+        }
+    }
+    
     /**
      * Transforms all institution filters in params into one filter containig all given filters,
      * separates them by logical 'OR' 
@@ -353,4 +371,5 @@ class Service
         }
         $params->set('fq', $resultFilters);
     }
+>>>>>>> 1908c00e9b8c583496a52891200ed8a07ccdd26b
 }
