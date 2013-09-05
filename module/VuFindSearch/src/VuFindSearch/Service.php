@@ -321,3 +321,4 @@ class Service
     {
         $this->getEventManager()->trigger(self::EVENT_POST, $response, $args);
     }
+}
