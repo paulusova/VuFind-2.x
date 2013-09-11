@@ -810,13 +810,16 @@ class AjaxController extends AbstractBase
     {
         $facets = $results->getFullFieldFacets(array_keys($fields));
         $retVal = array();
+        $currentYear = date("Y");
         foreach ($facets as $field => $values) {
             $newValues = array('data' => array());
             foreach ($values['data']['list'] as $current) {
                 // Only retain numeric values!
                 if (preg_match("/^[0-9]+$/", $current['value'])) {
-                    $newValues['data'][]
-                        = array($current['value'], $current['count']);
+                    if ($current['value'] < $currentYear ) {
+                        $newValues['data'][] = array(
+                            $current['value'], $current['count']);
+                    }
                 }
             }
             $retVal[$field] = $newValues;
@@ -1347,7 +1350,7 @@ class AjaxController extends AbstractBase
         } elseif ($prefix) {
             $params->setFacetPrefix($prefix);
         }
-        $facets = $results->getFullFieldFacets(array($facetName));
+        $facets = $results->getFullFieldFacets(array($facetName), false, -1, 'count');
         $result = $facets[$facetName]['data']['list'];
         return $this->output($result, self::STATUS_OK);
     }
