@@ -127,7 +127,7 @@ class UrlQueryHelper
      *
      * @return array
      */
-    protected function getParamArray()
+    public function getParamArray()
     {
         $params = $this->defaultParams;
 
@@ -410,6 +410,37 @@ class UrlQueryHelper
         return $this->updateQueryString(
             'limit', $l, $this->options->getDefaultLimit(), $escape, true
         );
+    }
+
+    /**
+     * Return HTTP parameters to render the current page with a different set
+     * of search terms.
+     *
+     * @param string $lookfor New search terms
+     * @param bool   $escape  Should we escape the string for use in the view?
+     *
+     * @return string
+     */
+    public function setSearchTerms($lookfor, $escape = true)
+    {
+        // If we're currently dealing with an advanced query, turn it off so
+        // that it can be overridden:
+        if ($this->params->getSearchType() == 'advanced') {
+            $savedSuppressQuery = $this->suppressQuery;
+            $this->suppressQuery = true;
+        }
+
+        // Generate the URL:
+        $new = $this->updateQueryString(
+            $this->basicSearchParam, $lookfor, null, $escape, true
+        );
+
+        // Restore settings to their previous state:
+        if (isset($savedSuppressQuery)) {
+            $this->suppressQuery = $savedSuppressQuery;
+        }
+
+        return $new;
     }
 
     /**

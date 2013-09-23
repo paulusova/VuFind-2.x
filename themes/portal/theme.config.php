@@ -1,5 +1,5 @@
 <?php
 return array(
-    'extends' => 'obalkyknih',
+    'extends' => 'obalkyknih-bootstrap',
     'favicon' => 'vufind-favicon.ico',
 );
