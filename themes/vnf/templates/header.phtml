@@ -1,37 +1,46 @@
 <? $account = $this->auth()->getManager(); ?>
-<div class="row clearfix">
-  <div class="span4 header-logo">
-    <a href="http://wwww.mzk.cz/"><img src="<?=$this->imageLink('fonoteka-header-mzk.png') ?>"></img></a>
+<nav class="navbar">
+  <div class="navbar-header">
+
+    <ul class="nav navbar-nav pull-left">
+      <li>
+        <a href="http://wwww.mzk.cz/"><img src="<?=$this->imageLink('fonoteka-header-mzk.png') ?>"></img></a>
+      </li>
+      <li>
+        <a href="/">Virtuální národní fonotéka</a>
+      </li>
+    </ul>
+
+    <ul class="nav navbar-nav pull-right">
+      <? if (isset($this->layout()->allLangs) && count($this->layout()->allLangs) > 1): ?>
+        <li>
+          <form class="form-inline" method="post" name="langForm" action="" id="langForm">
+              <select onChange="document.langForm.submit()" id="langForm_mylang" name="mylang" class="jumpMenu">
+                <? foreach ($this->layout()->allLangs as $langCode => $langName): ?>
+                  <option value="<?=$langCode?>"<?=$this->layout()->userLang == $langCode ? ' selected="selected"' : ''?>><?=$this->displayLanguageOption($langName)?></option>
+                <? endforeach; ?>
+              </select>
+              <noscript><input type="submit" class="btn" value="<?=$this->transEsc("Set")?>" /></noscript>
+          </form>
+        </li>
+      <? endif; ?>
+      
+      <? if (is_object($account) && $account->loginEnabled()): // hide login/logout if unavailable ?>
+        <li>
+          <span class="logoutOptions<? if(!$account->isLoggedIn()): ?> hide<? endif ?>">
+            <i class="icon-signout"></i><a href="<?=$this->url('myresearch-logout')?>" class="modal-link" title="<?=$this->transEsc("Log Out")?>"><?=$this->transEsc("Log Out")?></a>
+          </span>
+          <span id="loginOptions"<? if($account->isLoggedIn()): ?> class="hide"<? endif ?>>
+            <i class="icon-signin"></i> 
+            <? if ($sessionInitiator = $account->getSessionInitiator($this->serverUrl($this->url('myresearch-home')))): ?>
+              <a href="<?=$this->escapeHtml($sessionInitiator)?>"><?=$this->transEsc("Institutional Login")?></a>
+            <? else: ?>
+              <a href="<?=$this->url('myresearch-home')?>" class="modal-link" title="<?=$this->transEsc("Login")?>"><?=$this->transEsc("Login")?></a>
+            <? endif; ?>
+          </span>
+        </li>
+      <? endif; ?>
+    </ul>
+
   </div>
-  <div class="span4 header-text">
-    <a href="">Virtuální národní fonotéka</a>
-  </div>
-  <div class="span4 header-control">
-    <? if (isset($this->layout()->allLangs) && count($this->layout()->allLangs) > 1): ?>
-    <form class="form-horizontal" method="post" name="langForm" action="" id="langForm">
-      <div class="controls">
-        <select onChange="document.langForm.submit()" id="langForm_mylang" name="mylang" class="jumpMenu">
-        <? foreach ($this->layout()->allLangs as $langCode => $langName): ?>
-          <option value="<?=$langCode?>"<?=$this->layout()->userLang == $langCode ? ' selected="selected"' : ''?>><?=$this->displayLanguageOption($langName)?></option>
-        <? endforeach; ?>
-        </select>
-        <noscript><input type="submit" class="btn" value="<?=$this->transEsc("Set")?>" /></noscript>
-      </div>
-    </form>
-    <? endif; ?>
-    <? if (is_object($account) && $account->loginEnabled()): // hide login/logout if unavailable ?>
-      <span class="logoutOptions<? if(!$account->isLoggedIn()): ?> hide<? endif ?>">
-        <i class="icon-signout"></i><a href="<?=$this->url('myresearch-logout')?>" class="modal-link" title="<?=$this->transEsc("Log Out")?>"><?=$this->transEsc("Log Out")?></a>
-      </span>
-      <span id="loginOptions"<? if($account->isLoggedIn()): ?> class="hide"<? endif ?>>
-        <i class="icon-signin"></i> 
-        <? if ($sessionInitiator = $account->getSessionInitiator($this->serverUrl($this->url('myresearch-home')))): ?>
-          <a href="<?=$this->escapeHtml($sessionInitiator)?>"><?=$this->transEsc("Institutional Login")?></a>
-        <? else: ?>
-          <a href="<?=$this->url('myresearch-home')?>" class="modal-link" title="<?=$this->transEsc("Login")?>"><?=$this->transEsc("Login")?></a>
-        <? endif; ?>
-      </span>
-    <? endif; ?>
-  </div>
-</div>
- 
+</nav>
