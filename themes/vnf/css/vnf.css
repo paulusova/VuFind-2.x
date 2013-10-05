@@ -161,6 +161,10 @@ margin-left: 20px;
 margin-top: 5px;
 }
 
+.header-login a {
+color: #c9bfb5;
+}
+
 .row-fluid .span3 {
 margin-bottom: 50px;
 }
