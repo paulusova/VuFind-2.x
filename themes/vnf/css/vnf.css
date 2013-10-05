@@ -152,3 +152,7 @@ padding-top: 20px;
 margin-left: 20px;
 margin-top: 5px;
 }
+
+.row-fluid .span3 {
+width: 27%;
+}
