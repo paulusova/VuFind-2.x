@@ -62,3 +62,8 @@ text-shadow: 0 0px 0 #fff;
 .breadcrumb>.active {
 color: #6B6859;
 }
+
+.breadcrumb>li>.divider {
+padding: 0 5px;
+color: #966D6D;
+}
