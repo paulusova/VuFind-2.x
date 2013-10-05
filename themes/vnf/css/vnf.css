@@ -57,5 +57,9 @@ border-radius: 4px;
 media="all"
 .breadcrumb>li {
 display: inline-block;
-text-shadow: 0 0px 0 #fff;
+text-shadow: 0px 0px 0px ;
+}
+
+.breadcrumb>.active {
+color: #6B6859;
 }
