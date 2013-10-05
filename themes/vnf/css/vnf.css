@@ -34,7 +34,7 @@ background-color: red;
 background-repeat:no-repeat;
 background-position: bottom right;
 width: 20px;
-height: auto;
+height: inherit;
 float:right;
 }
 
