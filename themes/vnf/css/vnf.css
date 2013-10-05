@@ -39,3 +39,7 @@ color: #966023;
 text-decoration: underline;
 }
 
+.label-info, .badge-info {
+background-color: #516D86;
+}
+
