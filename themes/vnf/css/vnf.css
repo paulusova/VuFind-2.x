@@ -24,9 +24,9 @@ background-image: url('/themes/vnf/images/fonoteka-body-bg.png');
 .navbar .nav>li>a {
 float: none;
 padding: 10px 15px 10px;
-color: #777;
+color: #524840;
 text-decoration: none;
-text-shadow: 0 1px 0 #fff;
+text-shadow: 0 0px 0 #fff;
 }
 
 nav .header {
@@ -34,7 +34,8 @@ nav .header {
 }
 
 .header-title {
-  background-color:red;
+font-size: 18px;
+margin-top: 10px;
 }
 
 a {
