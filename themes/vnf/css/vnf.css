@@ -110,3 +110,14 @@ border-color: transparent;
 -moz-border-radius: 0;
 border-radius: 0;
 }
+
+
+p.homepage-citation {
+  font-style:italic  
+}
+
+p.homepage-citation-autor {
+  font-style:italic;
+  text-align:right;
+}
+
