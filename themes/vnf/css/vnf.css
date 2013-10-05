@@ -29,6 +29,12 @@ text-decoration: none;
 text-shadow: 0 0px 0 #fff;
 }
 
+.navbar .nav>li>a:hover {
+  color: #cabfb5;
+  text-decoration:underline;
+}
+
+
 #header .header-finisher {
 background-color: red;
 background-repeat:no-repeat;
@@ -50,11 +56,6 @@ background-position: bottom left;
 .header-title {
 font-size: 18px;
 margin-top: 13px;
-}
-
-.header-title a:hover {
-  color: #cabfb5;
-  text-decoration:underline;
 }
 
 .header-logo {
