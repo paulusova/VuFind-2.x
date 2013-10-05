@@ -24,14 +24,13 @@ background-image: url('/themes/vnf/images/fonoteka-body-bg.png');
 .navbar .nav>li>a {
 float: none;
 padding: 10px 15px 10px;
-color: #524840;
+color: #c9bfb5;
 text-decoration: none;
 text-shadow: 0 0px 0 #fff;
 }
 
 #header {
   background-color:#59524a;
-  width: 100%;
 }
 
 .header-title {
