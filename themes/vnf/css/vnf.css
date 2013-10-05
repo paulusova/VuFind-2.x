@@ -27,3 +27,15 @@ text-decoration: none;
 text-shadow: 0 1px 0 #fff;
 background-color: #59524a;
 }
+
+
+a {
+color: #26394a;
+text-decoration: none;
+}
+
+a:hover, a:focus {
+color: #26394a;
+text-decoration: underline;
+}
+
