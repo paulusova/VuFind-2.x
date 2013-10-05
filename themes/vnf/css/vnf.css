@@ -156,3 +156,8 @@ margin-top: 5px;
 .row-fluid .span3 {
 margin-bottom: 50px;
 }
+
+li {
+display: none;
+text-align: -webkit-match-parent;
+}
