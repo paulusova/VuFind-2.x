@@ -52,6 +52,10 @@ font-size: 18px;
 margin-top: 10px;
 }
 
+.header-logo {
+margin-top: 10px;
+}
+
 a {
 color: #966023;
 text-decoration: none;
