@@ -12,7 +12,7 @@ background-image: url('/themes/vnf/images/fonoteka-body-bg.png');
 
 body {
 margin: 0;
-font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-family: "Lucida Sans Unicode, Lucida Grande, sans-serif";
 font-size: 14px;
 line-height: 20px;
 color: #92887E;
@@ -28,6 +28,11 @@ color: #c9bfb5;
 text-decoration: none;
 text-shadow: 0 0px 0 #fff;
 }
+
+.navbar .nav>li>a:hover {
+  color: #cabfb5;
+}
+
 
 #header .header-finisher {
 background-color: red;
@@ -49,6 +54,10 @@ background-position: bottom left;
 
 .header-title {
 font-size: 18px;
+margin-top: 13px;
+}
+
+.header-logo {
 margin-top: 10px;
 }
 
@@ -84,7 +93,7 @@ background-color: #999;
 padding: 8px 15px;
 margin: 0 0 20px;
 list-style: none;
-background-color: #e0cab3;
+background-color: #DBD4CC;
 -webkit-border-radius: 4px;
 -moz-border-radius: 4px;
 border-radius: 4px;
