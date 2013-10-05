@@ -30,7 +30,8 @@ text-shadow: 0 0px 0 #fff;
 }
 
 #header {
-  background-color:red;
+  background-color:#59524a;
+  width: 100%;
 }
 
 .header-title {
