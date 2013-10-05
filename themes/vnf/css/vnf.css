@@ -115,7 +115,8 @@ border-radius: 0;
 
 
 p.homepage-citation {
-  font-style:italic  
+  font-style:italic
+  margin-top: 50px;
 }
 
 p.homepage-citation-author {
