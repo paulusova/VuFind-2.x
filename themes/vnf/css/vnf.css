@@ -54,10 +54,9 @@ background-color: #e0cab3;
 border-radius: 4px;
 }
 
-media="all"
 .breadcrumb>li {
 display: inline-block;
-text-shadow: 0px 0px 0px ;
+text-shadow: 0 0px 0 #fff;
 }
 
 .breadcrumb>.active {
