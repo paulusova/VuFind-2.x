@@ -42,7 +42,7 @@ float: none;
 padding: 10px 15px 10px;
 color: #c9bfb5;
 text-decoration: none;
-text-shadow: 0 0px 0 #fff;
+text-shadow: 0px 1px 0px #000;
 }
 
 .navbar .nav>li>a:hover {
