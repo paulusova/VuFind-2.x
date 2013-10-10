@@ -1,0 +1,72 @@
+<add>
+  <doc>
+    <field name="id">mzk.001322483</field>
+    <field name="title">Top item</field>
+    <field name="hierarchy_top_id">mzk.001322483</field>
+    <field name="hierarchy_top_title">Top item</field>
+    <field name="hierarchy_sequence">000</field>
+    <field name="is_hierarchy_id">mzk.001322483</field>
+    <field name="is_hierarchy_title">Top item</field>
+    <field name="hierarchy_browse">Top item{{{_ID_}}}mzk.001322483</field>
+  </doc>
+  <doc>
+    <field name="id">mzk.000338007</field>
+    <field name="title">Child 1</field>
+    <field name="hierarchy_top_id">mzk.001322483</field>
+    <field name="hierarchy_top_title">Top item</field>
+    <field name="hierarchy_parent_id">mzk.001322483</field>
+    <field name="hierarchy_parent_title">Top item</field>
+    <field name="hierarchy_sequence">001</field>
+    <field name="is_hierarchy_id">mzk.000338007</field>
+    <field name="is_hierarchy_title">Child 1</field>
+    <field name="hierarchy_browse">Child 1{{{_ID_}}}mzk.000338007</field>
+  </doc>
+  <doc>
+    <field name="id">mzk.001322420</field>
+    <field name="title">Child 2</field>
+    <field name="hierarchy_top_id">mzk.001322483</field>
+    <field name="hierarchy_top_title">Top item</field>
+    <field name="hierarchy_parent_id">mzk.001322483</field>
+    <field name="hierarchy_parent_title">Top item</field>
+    <field name="hierarchy_sequence">002</field>
+    <field name="is_hierarchy_id">mzk.001322420</field>
+    <field name="is_hierarchy_title">Child 2</field>
+    <field name="hierarchy_browse">Child 2{{{_ID_}}}mzk.001322420</field>
+  </doc>
+  <doc>
+    <field name="id">mzk.001304543</field>
+    <field name="title">Child 3</field>
+    <field name="hierarchy_top_id">mzk.001322483</field>
+    <field name="hierarchy_top_title">Top item</field>
+    <field name="hierarchy_parent_id">mzk.001322483</field>
+    <field name="hierarchy_parent_title">Top item</field>
+    <field name="hierarchy_sequence">003</field>
+    <field name="is_hierarchy_id">mzk.001304543</field>
+    <field name="is_hierarchy_title">Child 3</field>
+    <field name="hierarchy_browse">Child 3{{{_ID_}}}mzk.001304543</field>
+  </doc>
+  <doc>
+    <field name="id">mzk.001314573</field>
+    <field name="title">Subchild 1</field>
+    <field name="hierarchy_top_id">mzk.001322483</field>
+    <field name="hierarchy_top_title">Top item</field>
+    <field name="hierarchy_parent_id">mzk.001322420</field>
+    <field name="hierarchy_parent_title">Child 2</field>
+    <field name="hierarchy_sequence">004</field>
+    <field name="is_hierarchy_id">mzk.001314573</field>
+    <field name="is_hierarchy_title">Subchild 1</field>
+    <field name="hierarchy_browse">Subchild 1{{{_ID_}}}mzk.001314573</field>
+  </doc>
+  <doc>
+    <field name="id">mzk.001316576</field>
+    <field name="title">Subchild 2</field>
+    <field name="hierarchy_top_id">mzk.001322483</field>
+    <field name="hierarchy_top_title">Top item</field>
+    <field name="hierarchy_parent_id">mzk.001322420</field>
+    <field name="hierarchy_parent_title">Child 2</field>
+    <field name="hierarchy_sequence">005</field>
+    <field name="is_hierarchy_id">mzk.001316576</field>
+    <field name="is_hierarchy_title">Subchild 2</field>
+    <field name="hierarchy_browse">Subchild 2{{{_ID_}}}mzk.001316576</field>
+  </doc>
+</add>
