@@ -213,3 +213,7 @@ list-style-type: none;
   border-bottom: 1px solid;
   border-top: 1px solid;
 }
+
+.searchbox-title {
+  font-size: 21px;
+}
