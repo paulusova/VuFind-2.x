@@ -242,6 +242,8 @@ list-style-type: none;
   display: table;
   width: 100%;
   text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .institutions img {
