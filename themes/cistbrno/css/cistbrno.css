@@ -8,8 +8,7 @@ html {
 font-size: 100%;
 -webkit-text-size-adjust: 100%;
 -ms-text-size-adjust: 100%;
-background-color: #f3ece6;
-background-image: url('/themes/cistbrno/images/fonoteka-body-bg.png');
+background-color: #c9c9c9;
 }
 
 body {
@@ -17,9 +16,8 @@ margin: 0;
 font-family: "Open sans";
 font-size: 14px;
 line-height: 20px;
-color: #92887E;
+color: #c9c9c9;
 background-color: #f3ece6;
-background-image: url('/themes/cistbrno/images/fonoteka-body-bg.png');
 }
 
 
