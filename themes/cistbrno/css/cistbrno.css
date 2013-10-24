@@ -231,5 +231,9 @@ list-style-type: none;
 }
 
 .row-fluid .span8 {
-width: 35%;
+  width: 35%;
+}
+
+.row .span1 {
+  text-align: center;
 }
