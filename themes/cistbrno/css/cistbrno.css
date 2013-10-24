@@ -241,6 +241,7 @@ list-style-type: none;
 .row .institutions {
   display: table;
   text-align: middle;
+  margin-left: 300px;
 }
 
 
