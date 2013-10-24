@@ -217,3 +217,7 @@ list-style-type: none;
 .searchbox-title {
   font-size: 31px;
 }
+
+.row-fluid .span6  {
+  width: 35%;
+}
