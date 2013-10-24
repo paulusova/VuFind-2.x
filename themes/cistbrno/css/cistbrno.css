@@ -239,7 +239,7 @@ list-style-type: none;
 }
 
 .institutions {
-  display: table;
+  display: table-cell;
   text-align: center;
   float:left;
 }
