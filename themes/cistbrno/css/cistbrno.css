@@ -237,3 +237,10 @@ list-style-type: none;
 .row .span1 {
   text-align: center;
 }
+
+.row .institutions {
+  display: table;
+  text-align: center;
+}
+
+
