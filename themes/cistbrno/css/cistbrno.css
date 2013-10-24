@@ -242,7 +242,7 @@ list-style-type: none;
   display: table;
   width: 100%;
   text-align: center;
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
 .institutions img {
@@ -250,7 +250,7 @@ list-style-type: none;
 }
 
 .institutions a:hover {
-  opacity: 0;
+  opacity: 1;
 }
 
 
