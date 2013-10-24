@@ -157,7 +157,7 @@ p.homepage-citation-author {
 
 .row {
 margin-left: 0px;
-margin-top: 50px;
+margin-top: 20px;
 }
 
 .copyright {
@@ -210,8 +210,8 @@ list-style-type: none;
 
 .row-fluid .title-page {
   width: 100%;
-  border-bottom: 1px solid;
-  border-top: 1px solid;
+  border-bottom: 1px solid #c9c9c9;
+  border-top: 1px solid #c9c9c9;
 }
 
 .searchbox-title {
