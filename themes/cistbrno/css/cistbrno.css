@@ -216,6 +216,9 @@ list-style-type: none;
 
 .searchbox-title {
   font-size: 31px;
+  font-weight: 100;
+  margin-top: 30px;
+  line-height: 1.6em;
 }
 
 .row-fluid .span6  {
