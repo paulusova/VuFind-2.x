@@ -222,5 +222,5 @@ list-style-type: none;
 }
 
 .row-fluid .span6  {
-  width: 37%;
+  width: auto;
 }
