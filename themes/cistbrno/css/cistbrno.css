@@ -208,7 +208,7 @@ list-style-type: none;
   background-color: white;
 }
 
-.row-fluid {
+.row-fluid .title-page {
   width: 100%;
   border-bottom: 1px solid;
   border-top: 1px solid;
