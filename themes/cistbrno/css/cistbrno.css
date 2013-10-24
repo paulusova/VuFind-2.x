@@ -215,12 +215,12 @@ list-style-type: none;
 }
 
 .searchbox-title {
-  font-size: 31px;
+  font-size: 41px;
   font-weight: 100;
   margin-top: 30px;
   line-height: 1.6em;
 }
 
 .row-fluid .span6  {
-  width: 35%;
+  width: 37%;
 }
