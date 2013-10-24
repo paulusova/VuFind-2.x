@@ -223,4 +223,5 @@ list-style-type: none;
 
 .row-fluid .span6  {
   width: auto;
+  float: left;
 }
