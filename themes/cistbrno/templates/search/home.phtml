@@ -18,7 +18,7 @@
   $this->layout()->breadcrumbs = false;
 ?>
 <div class="row clearfix title-page">
-  <div class="span6">
+  <div class="span4">
     <img src="<?=$this->imageLink('cb-books-bg.jpg') ?>"></img>
   </div>
   <div class="span6 centering">
@@ -29,7 +29,7 @@
       <?=$this->render("search/searchbox-mainpage.phtml")?>
     </div>
     <div class="row clearfix">
-      <div class="span4">
+      <div class="span8">
         <p><strong><?=$this->transEsc('Search Options')?></strong></p>
         <ul>
           <li><a href="<?=$this->url('search-history')?>"><?=$this->transEsc('Search History')?></a></li>
