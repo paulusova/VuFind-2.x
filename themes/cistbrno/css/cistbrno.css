@@ -240,8 +240,8 @@ list-style-type: none;
 
 .institutions {
   display: table;
-  text-align: middle;
-  margin-left: 300px;
+  text-align: center;
+  float:left;
 }
 
 
