@@ -239,9 +239,9 @@ list-style-type: none;
 }
 
 .institutions {
-  display: table-cell;
+  display: table;
+  width: 100%;
   text-align: center;
-  float:left;
 }
 
 
