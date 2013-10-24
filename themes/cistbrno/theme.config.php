@@ -1,5 +1,8 @@
 <?php
 return array(
-    'extends' => 'obalkyknih-bootstrap',
+    'extends' => 'bootstrap',
+    'css' => array(
+        'cistbrno.css'
+    ),
     'favicon' => 'vufind-favicon.ico',
 );
