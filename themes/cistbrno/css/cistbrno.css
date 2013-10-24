@@ -229,3 +229,7 @@ list-style-type: none;
 .row .clearfix {
   margin-left: 20px;
 }
+
+.row-fluid .span8 {
+width: 35%;
+}
