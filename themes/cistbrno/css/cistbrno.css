@@ -242,11 +242,14 @@ list-style-type: none;
   display: table;
   width: 100%;
   text-align: center;
-  opacity: 0.3;
 }
 
 .institutions img {
   margin-left: 40px;
+}
+
+.institutions a {
+  opacity: 0.3;
 }
 
 .institutions a:hover {
