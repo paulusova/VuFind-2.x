@@ -238,7 +238,7 @@ list-style-type: none;
   text-align: center;
 }
 
-.row .institutions {
+.institutions {
   display: table;
   text-align: middle;
   margin-left: 300px;
