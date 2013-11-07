@@ -54,7 +54,8 @@ class SearchHandler
      * @var array
      */
     protected static $configKeys = array(
-        'CustomMunge', 'DismaxFields', 'QueryFields', 'DismaxParams', 'FilterQuery'
+        'CustomMunge', 'DismaxFields', 'DisableExtendedDismax', 'QueryFields',
+        'DismaxParams', 'FilterQuery'
     );
 
     /**
@@ -163,11 +164,23 @@ class SearchHandler
     /**
      * Return true if the handler defines Dismax fields.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasDismax()
     {
         return !empty($this->specs['DismaxFields']);
+    }
+
+    /**
+     * Return true if the handler supports Extended Dismax.
+     *
+     * @return bool
+     */
+    public function hasExtendedDismax()
+    {
+        $enabled = !isset($this->specs['DisableExtendedDismax'])
+            || !$this->specs['DisableExtendedDismax'];
+        return $enabled && $this->hasDismax();
     }
 
     /**
@@ -205,7 +218,7 @@ class SearchHandler
     /**
      * Return true if handler defines a filter query.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasFilterQuery()
     {
@@ -233,6 +246,7 @@ class SearchHandler
      */
     protected function dismaxSubquery($search)
     {
+        $handler = $this->hasExtendedDismax() ? 'edismax' : 'dismax';
         $dismaxParams = array();
         foreach ($this->specs['DismaxParams'] as $param) {
             $dismaxParams[] = sprintf(
@@ -240,7 +254,8 @@ class SearchHandler
             );
         }
         $dismaxQuery = sprintf(
-            '{!dismax qf="%s" %s}%s',
+            '{!%s qf="%s" %s}%s',
+            $handler,
             implode(' ', $this->specs['DismaxFields']),
             implode(' ', $dismaxParams),
             $search
@@ -253,8 +268,8 @@ class SearchHandler
      *
      * If optional argument $tokenize is true tokenize the search string.
      *
-     * @param string  $search   Search string
-     * @param boolean $tokenize Tokenize the search string?
+     * @param string $search   Search string
+     * @param bool   $tokenize Tokenize the search string?
      *
      * @return string
      */
@@ -328,18 +343,18 @@ class SearchHandler
      * If optional argument $advanced is true the search string contains
      * advanced lucene query syntax.
      *
-     * @param string  $search   Search string
-     * @param boolean $advanced Is the search an advanced search string?
+     * @param string $search   Search string
+     * @param bool   $advanced Is the search an advanced search string?
      *
      * @return string
      *
      */
     protected function createQueryString($search, $advanced = false)
     {
-        // If this is a basic query and we have Dismax settings, let's build
-        // a Dismax subquery to avoid some of the ugly side effects of our Lucene
-        // query generation logic.
-        if (!$advanced && $this->hasDismax()) {
+        // If this is a basic query and we have Dismax settings (or if we have
+        // Extended Dismax available), let's build a Dismax subquery to avoid
+        // some of the ugly side effects of our Lucene query generation logic.
+        if (($this->hasExtendedDismax() || !$advanced) && $this->hasDismax()) {
             $query = $this->dismaxSubquery($search);
         } else {
             $mungeRules  = $this->mungeRules();
