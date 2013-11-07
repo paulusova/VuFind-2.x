@@ -1,7 +1,9 @@
 <? $results = $this->recommend->getResults(); ?>
+<div id="urlParams" class="offscreen"><?=$results->getUrlQuery()->getParams()?></div>
 <? if ($results->getResultTotal() > 0): ?>
   <h4><?=$this->transEsc(isset($this->overrideSideFacetCaption) ? $this->overrideSideFacetCaption : 'Narrow Search')?></h4>
 <? endif; ?>
+<? $hierarchicalFacets = $results->getParams()->getHierarchicalFacets(); ?>
 <? $checkboxFilters = $results->getParams()->getCheckboxFacets(); if (count($checkboxFilters) > 0): ?>
   <? foreach ($checkboxFilters as $current): ?>
     <div class="checkboxFilter<?=($results->getResultTotal() < 1 && !$current['selected'] && !$current['alwaysVisible']) ? ' hide' : ''?>">
@@ -89,7 +91,13 @@
 JS;
         ?>
         <?=$this->inlineScript(\Zend\View\Helper\HeadScript::SCRIPT, $script, 'SET'); ?>
-      <? else: ?>
+        <? elseif (in_array($title, $hierarchicalFacets)): ?>
+            <ul class="jstreeContainer" id="<?= $title?>JSTContainer">
+            <? $i = 0; foreach ($cluster['list'] as $thisFacet): ?>
+                <li <? if ($thisFacet['isApplied']) echo 'class="appliedJSTFacet"' ?>><a href="<?=$this->currentPath().$results->getUrlQuery()->addFacet($title, $thisFacet['value'])?>" id="<?= $thisFacet['value']?>JSTFacet"><?=$this->escapeHtml($thisFacet['displayText'])?> (<?=$this->escapeHtml($thisFacet['count'])?>)</a></li>
+            <? endforeach; ?>
+           </ul>
+        <? else:?>
         <li class="nav-header"><?=$this->transEsc($cluster['label'])?></li>
         <? foreach ($cluster['list'] as $i=>$thisFacet): ?>
           <?

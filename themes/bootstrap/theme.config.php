@@ -16,7 +16,14 @@ return array(
         'core/bootstrap.js',
         'common.js',
         'lightbox.js',
-        'rc4.js'
+        'rc4.js',
+            'jquery.min.js',
+            'jquery.form.js',
+            'jquery.metadata.js',
+            'jquery.validate.min.js',
+            'jquery-ui/js/jquery-ui.js',
+        'jsTree/jquery.jstree.js',
+        'jsTreeHierarchicalFacets.js'
     ),
     'favicon' => 'vufind-favicon.ico',
     'helpers' => array(
