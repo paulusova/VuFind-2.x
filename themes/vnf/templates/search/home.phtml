@@ -19,7 +19,8 @@
 ?>
 <div class="row clearfix">
   <div class="span6">
-    <img src="<?=$this->imageLink('fonoteka-deska.png') ?>"></img>
+    <?$userLang = $this->layout()->userLang?>
+    <img src="<?=$this->imageLink("fonoteka-deska-$userLang.png") ?>"></img>
   </div>
   <div class="span6 centering">
     <div class="searchbox">
