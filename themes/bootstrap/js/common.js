@@ -67,6 +67,12 @@ function setupOrFacets() {
   }
 }
 
+function switch_lang(lang) {
+  document.langForm.mylang.value = lang;
+  document.langForm.submit() ;
+}
+
+
 $(document).ready(function() {
   // Highlight previous links, grey out following
   $('.backlink')

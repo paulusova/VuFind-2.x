@@ -13,17 +13,13 @@
 
     <ul class="nav navbar-nav pull-right">
       <? if (isset($this->layout()->allLangs) && count($this->layout()->allLangs) > 1): ?>
-        <li class="header-languages">
-          <form class="form-inline" method="post" name="langForm" action="" id="langForm">
-              <select onChange="document.langForm.submit()" id="langForm_mylang" name="mylang" class="jumpMenu">
-                <? foreach ($this->layout()->allLangs as $langCode => $langName): ?>
-                  <option value="<?=$langCode?>"<?=$this->layout()->userLang == $langCode ? ' selected="selected"' : ''?>><?=$this->displayLanguageOption($langName)?></option>
-                <? endforeach; ?>
-              </select>
-              <noscript><input type="submit" class="btn" value="<?=$this->transEsc("Set")?>" /></noscript>
-          </form>
-        </li>
-      <? endif; ?>
+      <form method="post" id="langForm" name="langForm" action="">
+        <input type="hidden" name="mylang" id="langForm_mylang" />
+        <? foreach ($this->layout()->allLangs as $langCode => $langName): ?>
+          <a id="langForm_mylang" href="javascript:switch_lang('<?=$langCode?>')"><img alt="<?=$this->transEsc($langName)?>" src="<?=$this->imageLink('flags/'.$langCode.'.png') ?>"></a>
+        <? endforeach; ?>
+      </form>
+    <? endif; ?>
       
       <? if (is_object($account) && $account->loginEnabled()): // hide login/logout if unavailable ?>
         <li class="header-login">
