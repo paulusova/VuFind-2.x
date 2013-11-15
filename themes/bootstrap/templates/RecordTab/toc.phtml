@@ -5,10 +5,13 @@
     $toc = $this->driver->getTOC();
 ?>
 <? if (!empty($toc)): ?>
+  <? $tocArray = explode("--", $toc[0]) ?>
   <strong><?=$this->transEsc('Table of Contents')?>: </strong>
   <ul class="toc">
-    <? foreach ($toc as $line): ?>
-      <li><?=$this->escapeHtml($line)?></li>
+    <? foreach ($tocArray as $splited): ?>
+      <? foreach (explode(';', $splited) as $line): ?>
+        <li><?=$this->escapeHtml($line)?></li>
+      <? endforeach; ?>
     <? endforeach; ?>
   </ul>
 <? else: ?>
