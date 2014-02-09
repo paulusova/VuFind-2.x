@@ -118,8 +118,8 @@ color: #966D6D;
 hr {
 margin: 20px 0;
 border: 0;
-border-top: 1px solid #eee;
-border-bottom: 1px solid #E6DBBE;
+border-top: 1px solid #C2BE9E;
+border-bottom: 0px solid #E6DBBE;
 }
 
 .well {
@@ -131,9 +131,9 @@ border: 1px solid #E6DBBE;
 -webkit-border-radius: 4px;
 -moz-border-radius: 4px;
 border-radius: 4px;
--webkit-box-shadow: inset 0 0px 0px rgba(0,0,0,0.05);
--moz-box-shadow: inset 0 0px 0px rgba(0,0,0,0.05);
-box-shadow: inset 0 0px 0px rgba(0,0,0,0.05);
+-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+-moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
 }
 
 .btn-link {
@@ -204,3 +204,12 @@ list-style-type: none;
 -webkit-margin-end: 0px;
 -webkit-padding-start: 0px;
 }
+
+.nav-list .divider {
+height: 1px;
+margin: 9px 1px;
+overflow: hidden;
+background-color: #CCC7B2;
+border-bottom: 1px solid #fff;
+}
+
