@@ -105,6 +105,7 @@ border-radius: 4px;
 
 .breadcrumb>li {
 display: inline-block;
+text-shadow: 0px 0px 0px;
 }
 
 .breadcrumb>.active {
@@ -218,4 +219,14 @@ border-bottom: 1px solid #fff;
 .nav>li>a:hover, .nav>li>a:focus {
 text-decoration: none;
 background-color: #F8F7F0;
+}
+
+.table-striped tbody>tr:nth-child(odd)>td, .table-striped tbody>tr:nth-child(odd)>th {
+background-color: rgba(255, 255, 255, 0.27);
+}
+
+.nav-list>.active>a, .nav-list>.active>a:hover, .nav-list>.active>a:focus {
+color: #fff;
+text-shadow: 0 0px 0 rgba(0,0,0,0.2);
+background-color: #85795F;
 }
