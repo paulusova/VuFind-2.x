@@ -215,3 +215,7 @@ background-color: #CCC7B2;
 border-bottom: 1px solid #fff;
 }
 
+.nav>li>a:hover, .nav>li>a:focus {
+text-decoration: none;
+background-color: #F8F7F0;
+}
