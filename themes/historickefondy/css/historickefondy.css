@@ -230,3 +230,11 @@ color: #fff;
 text-shadow: 0 0px 0 rgba(0,0,0,0.2);
 background-color: #85795F;
 }
+
+.table th, .table td {
+padding: 8px;
+line-height: 20px;
+text-align: left;
+vertical-align: top;
+border-top: 1px solid #DAD5BF;
+}
