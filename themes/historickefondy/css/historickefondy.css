@@ -8,7 +8,7 @@ html {
 font-size: 100%;
 -webkit-text-size-adjust: 100%;
 -ms-text-size-adjust: 100%;
-background-color: #f6f0d6;
+background-color: #f5efd7;
 background-image: url('/themes/historickefondy/images/hf-background-sites.jpg');
 background-repeat: repeat-x;
 }
@@ -31,7 +31,7 @@ padding: 10px 15px 10px;
 color: #c9bfb5;
 text-decoration: none;
 text-transform:uppercase;
-text-shadow: 0px -1px 0px #34312d;
+text-shadow: 0px 0px 0px;
 }
 
 .navbar .nav>li>a:hover {
@@ -67,7 +67,7 @@ margin-top: 10px;
 }
 
 a {
-color: #966023;
+color: #5E4529;
 text-decoration: none;
 }
 
@@ -87,7 +87,6 @@ font-size: 11.844px;
 font-weight: normal;
 line-height: 14px;
 color: #fff;
-text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
 white-space: nowrap;
 vertical-align: baseline;
 background-color: #999;
@@ -98,7 +97,7 @@ background-color: #999;
 padding: 8px 15px;
 margin: 0 0 20px;
 list-style: none;
-background-color: #DBD4CC;
+background-color: #BEB297;
 -webkit-border-radius: 4px;
 -moz-border-radius: 4px;
 border-radius: 4px;
@@ -106,11 +105,12 @@ border-radius: 4px;
 
 .breadcrumb>li {
 display: inline-block;
-text-shadow: 0 0px 0 #fff;
+text-shadow: 0px 0px 0px;
 }
 
 .breadcrumb>.active {
-color: #6B6859;
+color: #4E463C;
+text-shadow: 0px 0px 0px;
 }
 
 .breadcrumb>li>.divider {
@@ -121,15 +121,15 @@ color: #966D6D;
 hr {
 margin: 20px 0;
 border: 0;
-border-top: 1px solid #eee;
-border-bottom: 1px solid #E6DBBE;
+border-top: 1px solid #C2BE9E;
+border-bottom: 0px solid #E6DBBE;
 }
 
 .well {
 min-height: 20px;
 padding: 19px;
 margin-bottom: 20px;
-background-color: #f5f5f5;
+background-color: #F3F1E2;
 border: 1px solid #E6DBBE;
 -webkit-border-radius: 4px;
 -moz-border-radius: 4px;
@@ -206,4 +206,35 @@ list-style-type: none;
 -webkit-margin-start: 0px;
 -webkit-margin-end: 0px;
 -webkit-padding-start: 0px;
+}
+
+.nav-list .divider {
+height: 1px;
+margin: 9px 1px;
+overflow: hidden;
+background-color: #CCC7B2;
+border-bottom: 1px solid #fff;
+}
+
+.nav>li>a:hover, .nav>li>a:focus {
+text-decoration: none;
+background-color: #F8F7F0;
+}
+
+.table-striped tbody>tr:nth-child(odd)>td, .table-striped tbody>tr:nth-child(odd)>th {
+background-color: rgba(255, 255, 255, 0.27);
+}
+
+.nav-list>.active>a, .nav-list>.active>a:hover, .nav-list>.active>a:focus {
+color: #fff;
+text-shadow: 0 0px 0 rgba(0,0,0,0.2);
+background-color: #85795F;
+}
+
+.table th, .table td {
+padding: 8px;
+line-height: 20px;
+text-align: left;
+vertical-align: top;
+border-top: 1px solid #DAD5BF;
 }
