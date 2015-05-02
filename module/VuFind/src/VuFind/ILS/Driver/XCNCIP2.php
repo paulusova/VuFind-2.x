@@ -1100,7 +1100,12 @@ class XCNCIP2 extends AbstractBase implements
         $problem = $response->xpath('//ns1:Problem');
         if ($problem == null)
             return true;
-            //print_r($problem[0]->AsXML());
+        
+        if($this->config['Catalog']['printProblems']) {
+        	print("There was an NCIP Problem:<br/><br/>");
+            print_r(htmlspecialchars($problem[0]->AsXML()));
+        }
+        
         return false;
     }
 
