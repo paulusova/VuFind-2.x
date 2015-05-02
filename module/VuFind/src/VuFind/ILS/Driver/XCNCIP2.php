@@ -720,6 +720,10 @@ class XCNCIP2 extends AbstractBase implements
             $item_id = $current->xpath(
                     'ns1:Ext/ns1:BibliographicDescription/' .
                              'ns1:BibliographicItemId/ns1:BibliographicItemIdentifier');
+            
+            // If is BiblioItemId empty, than the id is in ItemId ..
+            $item_id = count($item_id) == 0 ? $request : $item_id;
+            
             $bibliographicId = substr(explode("-", (string) $item_id[0])[0], 5);
             $dateDue = $current->xpath('ns1:DateDue');
             $title = $current->xpath(
