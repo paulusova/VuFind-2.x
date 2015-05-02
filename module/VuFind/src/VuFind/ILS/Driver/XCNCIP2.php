@@ -657,7 +657,7 @@ class XCNCIP2 extends AbstractBase implements
     	// See if there ShibbolethWAYF took place while creating $username ..
     	$shibbolethArray = split(ShibbolethWithWAYF::SEPARATOR, $username);
     	if (count($shibbolethArray) > 1) {
-    		// Set username as last from that array ..
+    		// Logging is using the nickname which is at the last position of $cat_username:
     		$username = $shibbolethArray[count($shibbolethArray) - 1];
     	}
     	
@@ -1343,8 +1343,10 @@ class NCIPRequests
      */
     public function getMyProfile ($patron, $extras = null)
     {
+    	// Did ShibbolethWAYF took place in creating $cat_username ?
     	$shibbolethArray = split(ShibbolethWithWAYF::SEPARATOR, $patron['cat_username']);
     	if ($shibbolethArray > 1) {
+    		// UserId is penultimate
     		$userId = $shibbolethArray[count($shibbolethArray) - 2];
     	} else
     	    $userId = htmlspecialchars($patron['id']);
