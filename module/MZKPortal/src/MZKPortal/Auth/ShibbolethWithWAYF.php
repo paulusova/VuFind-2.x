@@ -54,7 +54,7 @@ class ShibbolethWithWAYF extends Shibboleth
 
     protected $attribsToCheck = array(
         'username', 'cat_username', 'email', 'lastname',
-        'firstname', 'college', 'major', 'home_library'
+        'firstname', 'college', 'major', 'home_library', 'cat_password',
     );
 
     public function __construct(\VuFind\Config\PluginManager $configLoader)
@@ -117,8 +117,16 @@ class ShibbolethWithWAYF extends Shibboleth
             }
         }
         if (empty($attributes['username'])) {
-            throw new AuthException('authentication_error_admin');
+            throw new AuthException('authentication_error_blank');
         }
+        
+        if (empty($attributes['cat_password'])) { // Password needed to verify login through ILS NCIP if XCNCIP2 is the driver used
+            throw new AuthException('authentication_error_blank');  
+        }
+        
+        // Needed to merge because of ILS NCIP's verification login, where is cat_username passed by default
+        $attributes['cat_username'] = $attributes['cat_username'] . self::SEPARATOR . $attributes['username'];
+        
         $user = $this->getUserTable()->getByUsername($attributes['username']);
         foreach ($attributes as $key => $value) {
             $user->$key = $value;

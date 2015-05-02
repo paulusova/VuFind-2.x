@@ -29,6 +29,7 @@ namespace VuFind\ILS\Driver;
 use VuFind\Exception\ILS as ILSException;
 use DOMDocument;
 use Zend\XmlRpc\Value\String;
+use MZKPortal\Auth\ShibbolethWithWAYF;
 
 /**
  * XC NCIP Toolkit (v2) ILS Driver
@@ -653,6 +654,13 @@ class XCNCIP2 extends AbstractBase implements
      */
     public function patronLogin ($username, $password)
     {
+    	// See if there ShibbolethWAYF took place while creating $username ..
+    	$shibbolethArray = split(ShibbolethWithWAYF::SEPARATOR, $username);
+    	if (count($shibbolethArray) > 1) {
+    		// Set username as last from that array ..
+    		$username = $shibbolethArray[count($shibbolethArray) - 1];
+    	}
+    	
         $request = $this->requests->patronLogin($username, $password);
         $response = $this->sendRequest($request);
         $id = $response->xpath(
@@ -672,7 +680,7 @@ class XCNCIP2 extends AbstractBase implements
                     'id' => empty($id) ? '' : (string)$id[0],
                     'firstname' => empty($firstname) ? '' : (string)$firstname[0],
                     'lastname'  => empty($lastname) ? '' : (string)$lastname[0],
-                    'cat_username' => $username,
+                    'cat_username' => join(ShibbolethWithWAYF::SEPARATOR, $shibbolethArray),
                     'cat_password' => $password,
                     'email' => empty($email) ? '' : (string) $email[0],
                     'major' => null,
@@ -1335,6 +1343,12 @@ class NCIPRequests
      */
     public function getMyProfile ($patron, $extras = null)
     {
+    	$shibbolethArray = split(ShibbolethWithWAYF::SEPARATOR, $patron['cat_username']);
+    	if ($shibbolethArray > 1) {
+    		$userId = $shibbolethArray[count($shibbolethArray) - 2];
+    	} else
+    	    $userId = htmlspecialchars($patron['id']);
+    	
         if ($extras == null) {
             $extras = array(
                     '<ns1:UserElementType ns1:Scheme="http://www.niso.org/ncip/v1_0/' .
@@ -1354,7 +1368,7 @@ class NCIPRequests
                  '<ns1:NCIPMessage xmlns:ns1="http://www.niso.org/2008/ncip" ' .
                  'ns1:version="http://www.niso.org/schemas/ncip/v2_0/imp1/xsd/ncip_v2_0.xsd">' .
                  '<ns1:LookupUser>' . '<ns1:UserId>' .
-                 '<ns1:UserIdentifierValue>' . htmlspecialchars($patron['id']) .
+                 '<ns1:UserIdentifierValue>' . $userId .
                  '</ns1:UserIdentifierValue>' . '</ns1:UserId>' .
                  implode('', $extras) . '</ns1:LookupUser>' .
                  '</ns1:NCIPMessage>';
