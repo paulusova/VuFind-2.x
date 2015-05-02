@@ -116,9 +116,9 @@ class ShibbolethWithWAYF extends Shibboleth
                 }
             }
         }
-        if (empty($attributes['username'])) {
+        if (empty($attributes['username']) || empty($attributes['home_library'])) {
             throw new AuthException('authentication_error_blank');
-        }
+        }        
         
         if (empty($attributes['cat_password'])) { // Password needed to verify login through ILS NCIP if XCNCIP2 is the driver used
             throw new AuthException('authentication_error_blank');  
@@ -126,6 +126,9 @@ class ShibbolethWithWAYF extends Shibboleth
         
         // Needed to merge because of ILS NCIP's verification login, where is cat_username passed by default
         $attributes['cat_username'] = $attributes['cat_username'] . self::SEPARATOR . $attributes['username'];
+        
+        // Username is unique only within one organization - append home_library, which is SIGLA actually
+        $attributes['username'] = $attributes['home_library'] . self::SEPARATOR . $attributes['username'];
         
         $user = $this->getUserTable()->getByUsername($attributes['username']);
         foreach ($attributes as $key => $value) {
