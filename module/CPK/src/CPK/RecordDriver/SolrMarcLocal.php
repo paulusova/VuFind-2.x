@@ -22,6 +22,10 @@ class SolrMarcLocal extends ParentSolrMarc
         $this->fields['title_sub_display'] : '';
     }
 
+    public function openURLActive() {
+        return false;
+    }
+
     /**
      * Get an array of all the formats associated with the record.
      *
