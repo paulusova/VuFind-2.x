@@ -50,6 +50,9 @@ function html_entity_decode(string, quote_style)
 
 // Turn GET string into array
 function deparam(url) {
+  if(!url.match(/\?/)) {
+    return [];
+  }
   var request = {};
   var pairs = url.substring(url.indexOf('?') + 1).split('&');
   for (var i = 0; i < pairs.length; i++) {
@@ -118,7 +121,8 @@ function bulkActionSubmit($form) {
   var submit = $form.find('[type="submit"][clicked=true]').attr('name');
   var checks = $form.find('input.checkbox-select-item:checked');
   if(checks.length == 0 && submit != 'empty') {
-    return Lightbox.displayError(vufindString['bulk_noitems_advice']);
+    Lightbox.displayError(vufindString['bulk_noitems_advice']);
+    return false;
   }
   if (submit == 'print') {
     //redirect page
@@ -176,10 +180,7 @@ function registerLightboxEvents() {
    * if it matches the title bar of the lightbox
    */
   var header = $('#modal .modal-title').html();
-  var contentHeader = $('#modal .modal-body .lead');
-  if(contentHeader.length == 0) {
-    contentHeader = $('#modal .modal-body h2');
-  }
+  var contentHeader = $('#modal .modal-body h2');
   contentHeader.each(function(i,op) {
     if (op.innerHTML == header) {
       $(op).hide();
@@ -474,8 +475,10 @@ $(document).ready(function() {
       dataType:'json',
       data:Lightbox.getFormData($(evt.target)),
       success:function(data) {
-        if(data.data.needs_redirect) {
+        if(data.data.export_type == 'download' || data.data.needs_redirect) {
           document.location.href = data.data.result_url;
+          Lightbox.close();
+          return false;
         } else {
           Lightbox.changeContent(data.data.result_additional);
         }
