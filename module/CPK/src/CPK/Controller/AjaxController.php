@@ -144,8 +144,7 @@ class AjaxController extends AjaxControllerBase
         $parentRecordDriver = $recordLoader->load($parentRecordID);
         $isn = $parentRecordDriver->getIsn();
         if ($isn === false)
-        	$isn = $recordDriver->getIsn();
-
+            $isn = $recordDriver->getIsn();
 
         $url = $this->params()->fromQuery('sfxUrl');
 
@@ -154,14 +153,14 @@ class AjaxController extends AjaxControllerBase
         parse_str($openUrl, $additionalParams);
 
         foreach ($additionalParams as $key => $val) {
-        	$additionalParams[str_replace("rft_", "rft.", $key)] = $val;
+            $additionalParams[str_replace("rft_", "rft.", $key)] = $val;
         }
 
         $issnPattern = "[0-9][0-9][0-9][0-9][-][0-9][0-9][0-9][X0-9]";
         if (preg_match($issnPattern, $isn)) {
-        	$isnKey = "rft.issn";
+            $isnKey = "rft.issn";
         } else {
-        	$isnKey = "rft.isbn";
+            $isnKey = "rft.isbn";
         }
 
         $params = array(
@@ -169,8 +168,7 @@ class AjaxController extends AjaxControllerBase
             'ctx_ver' => 'Z39.88-2004',
             'ctx_enc' => 'info:ofi/enc:UTF-8',
             'sfx.response_type' => 'simplexml',
-            $isnKey => str_replace("-", "",
-                (string) $isn)
+            $isnKey => str_replace("-", "", (string) $isn)
         );
 
         $allParams = array_merge($params, $additionalParams);
@@ -199,25 +197,25 @@ class AjaxController extends AjaxControllerBase
      */
     public function get866Ajax()
     {
-    	$parentRecordID = $this->params()->fromQuery('parentRecordID');
-    	$recordLoader = $this->getServiceLocator()->get('VuFind\RecordLoader');
-    	$recordDriver = $recordLoader->load($parentRecordID);
+        $parentRecordID = $this->params()->fromQuery('parentRecordID');
+        $recordLoader = $this->getServiceLocator()->get('VuFind\RecordLoader');
+        $recordDriver = $recordLoader->load($parentRecordID);
 
-    	$field866 = $recordDriver->get866Data();
+        $field866 = $recordDriver->get866Data();
 
-    	foreach ($field866 as $key => $field) {
-    		$fieldArr = explode("|", $field);
-    		$source = $fieldArr[0];
-    		$translation = $this->translate('source_'.$source);
-    		$field866[$key] = str_replace($source, $translation, $field);
-    	}
+        foreach ($field866 as $key => $field) {
+            $fieldArr = explode("|", $field);
+            $source = $fieldArr[0];
+            $translation = $this->translate('source_' . $source);
+            $field866[$key] = str_replace($source, $translation, $field);
+        }
 
-    	$vars[] = array(
-    			'field866' => $field866
-    	);
+        $vars[] = array(
+            'field866' => $field866
+        );
 
-    	// Done
-    	return $this->output($vars, self::STATUS_OK);
+        // Done
+        return $this->output($vars, self::STATUS_OK);
     }
 
     /**
@@ -348,7 +346,8 @@ class AjaxController extends AjaxControllerBase
                     $itemsStatuses[$id]['due_date'] = $status['due_date'];
 
                 if (! empty($status['hold_type']))
-                    $itemsStatuses[$id]['hold_type'] = $viewRend->transEsc($status['hold_type']);
+                    $itemsStatuses[$id]['hold_type'] = $viewRend->transEsc(
+                        $status['hold_type']);
 
                 if (! empty($status['label']))
                     $itemsStatuses[$id]['label'] = $status['label'];
@@ -364,6 +363,194 @@ class AjaxController extends AjaxControllerBase
 
             $retVal['statuses'] = $itemsStatuses;
             return $this->output($retVal, self::STATUS_OK);
+        } else
+            return $this->output(
+                "ILS Driver isn't instanceof MultiBackend - ending job now.",
+                self::STATUS_ERROR);
+    }
+
+    public function getMyProfileAjax()
+    {
+        // Get the cat_username being requested
+        $cat_username = $this->params()->fromPost('cat_username');
+
+        $hasPermissions = $this->hasPermissions($cat_username);
+
+        if ($hasPermissions instanceof \Zend\Http\Response)
+            return $hasPermissions;
+
+        $ilsDriver = $this->getILS()->getDriver();
+
+        if ($ilsDriver instanceof \CPK\ILS\Driver\MultiBackend) {
+
+            $patron = [
+                'cat_username' => $cat_username,
+                'id' => $cat_username
+            ];
+
+            try {
+                // Try to get the profile ..
+                $profile = $ilsDriver->getMyProfile($patron);
+            } catch (\VuFind\Exception\ILS $e) {
+
+                // Something went wrong - include cat_username to properly
+                // attach the error message into the right table
+
+                $debugMsg = ('development' == APPLICATION_ENV) ? ': ' .
+                     $e->getMessage() : '';
+
+                $message = $this->translate('An error has occurred') . $debugMsg;
+
+                $data = [
+                    'message' => $message,
+                    'cat_username' => $cat_username
+                ];
+
+                return $this->output($data, self::STATUS_ERROR);
+            }
+
+            return $this->output($profile, self::STATUS_OK);
+        } else
+            return $this->output(
+                "ILS Driver isn't instanceof MultiBackend - ending job now.",
+                self::STATUS_ERROR);
+    }
+
+    public function getMyHoldsAjax()
+    {
+        // Get the cat_username being requested
+        $cat_username = $this->params()->fromPost('cat_username');
+
+        $hasPermissions = $this->hasPermissions($cat_username);
+
+        if ($hasPermissions instanceof \Zend\Http\Response)
+            return $hasPermissions;
+
+        $ilsDriver = $this->getILS()->getDriver();
+
+        if ($ilsDriver instanceof \CPK\ILS\Driver\MultiBackend) {
+
+            $patron = [
+                'cat_username' => $cat_username,
+                'id' => $cat_username
+            ];
+
+            try {
+                // Try to get the profile ..
+                $holds = $ilsDriver->getMyHolds($patron);
+            } catch (\VuFind\Exception\ILS $e) {
+
+                // Something went wrong - include cat_username to properly
+                // attach the error message into the right table
+
+                $debugMsg = ('development' == APPLICATION_ENV) ? ': ' .
+                     $e->getMessage() : '';
+
+                $message = $this->translate('An error has occurred') . $debugMsg;
+
+                $data = [
+                    'message' => $message,
+                    'cat_username' => $cat_username
+                ];
+
+                return $this->output($data, self::STATUS_ERROR);
+            }
+
+            return $this->output($holds, self::STATUS_OK);
+        } else
+            return $this->output(
+                "ILS Driver isn't instanceof MultiBackend - ending job now.",
+                self::STATUS_ERROR);
+    }
+
+    public function getMyFinesAjax()
+    {
+        // Get the cat_username being requested
+        $cat_username = $this->params()->fromPost('cat_username');
+
+        $hasPermissions = $this->hasPermissions($cat_username);
+
+        if ($hasPermissions instanceof \Zend\Http\Response)
+            return $hasPermissions;
+
+        $ilsDriver = $this->getILS()->getDriver();
+
+        if ($ilsDriver instanceof \CPK\ILS\Driver\MultiBackend) {
+
+            $patron = [
+                'cat_username' => $cat_username,
+                'id' => $cat_username
+            ];
+
+            try {
+                // Try to get the profile ..
+                $fines = $ilsDriver->getMyFines($patron);
+            } catch (\VuFind\Exception\ILS $e) {
+
+                // Something went wrong - include cat_username to properly
+                // attach the error message into the right table
+
+                $debugMsg = ('development' == APPLICATION_ENV) ? ': ' .
+                     $e->getMessage() : '';
+
+                $message = $this->translate('An error has occurred') . $debugMsg;
+
+                $data = [
+                    'message' => $message,
+                    'cat_username' => $cat_username
+                ];
+
+                return $this->output($data, self::STATUS_ERROR);
+            }
+
+            return $this->output($fines, self::STATUS_OK);
+        } else
+            return $this->output(
+                "ILS Driver isn't instanceof MultiBackend - ending job now.",
+                self::STATUS_ERROR);
+    }
+
+    public function getMyTransactionsAjax()
+    {
+        // Get the cat_username being requested
+        $cat_username = $this->params()->fromPost('cat_username');
+
+        $hasPermissions = $this->hasPermissions($cat_username);
+
+        if ($hasPermissions instanceof \Zend\Http\Response)
+            return $hasPermissions;
+
+        $ilsDriver = $this->getILS()->getDriver();
+
+        if ($ilsDriver instanceof \CPK\ILS\Driver\MultiBackend) {
+
+            $patron = [
+                'cat_username' => $cat_username,
+                'id' => $cat_username
+            ];
+
+            try {
+                // Try to get the profile ..
+                $transactions = $ilsDriver->getMyTransactions($patron);
+            } catch (\VuFind\Exception\ILS $e) {
+
+                // Something went wrong - include cat_username to properly
+                // attach the error message into the right table
+
+                $debugMsg = ('development' == APPLICATION_ENV) ? ': ' .
+                     $e->getMessage() : '';
+
+                $message = $this->translate('An error has occurred') . $debugMsg;
+
+                $data = [
+                    'message' => $message,
+                    'cat_username' => $cat_username
+                ];
+
+                return $this->output($data, self::STATUS_ERROR);
+            }
+
+            return $this->output($transactions, self::STATUS_OK);
         } else
             return $this->output(
                 "ILS Driver isn't instanceof MultiBackend - ending job now.",
@@ -410,5 +597,50 @@ class AjaxController extends AjaxControllerBase
     {
         $initialString = 'Unknown Status';
         return $viewRend->transEsc('status_' . $initialString, null, $initialString);
+    }
+
+    /**
+     * Checks whether User identified by his cookies ownes the identity
+     * he is asking informations about.
+     *
+     * Returns true, if the User has all the rights to do so.
+     *
+     * If the User is not authorized, an \Zend\Http\Response with JSON message
+     * is returned.
+     *
+     * @param string $cat_username
+     * @return \Zend\Http\Response|boolean
+     */
+    protected function hasPermissions($cat_username)
+    {
+
+        // Check user is logged in ..
+        if (! $user = $this->getAuthManager()->isLoggedIn()) {
+            return $this->output('You are not logged in.', self::STATUS_ERROR);
+        }
+
+        if ($cat_username === null) {
+            return $this->output('No cat_username provided.', self::STATUS_ERROR);
+        }
+
+        // Check user ownes the identity he is requesting for ..
+        $identities = $user->getLibraryCards();
+
+        $isOwner = false;
+        foreach ($identities as $identity) {
+            if ($identity->cat_username === $cat_username) {
+                $isOwner = true;
+                break;
+            }
+        }
+
+        if (! $isOwner) {
+            // TODO: Implement incident reporting.
+            return $this->output(
+                'You are not authorized to query data about this identity. This incident will be reported.',
+                self::STATUS_ERROR);
+        }
+
+        return true;
     }
 }
